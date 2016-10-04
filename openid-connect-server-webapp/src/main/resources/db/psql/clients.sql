@@ -24,8 +24,8 @@ INSERT INTO client_scope_TEMP (owner_id, scope) VALUES
 INSERT INTO client_redirect_uri_TEMP (owner_id, redirect_uri) VALUES
 	('GE_Pledge_Tool', 'http://localhost/'),
 	('GE_Pledge_Tool', 'http://localhost:8080/'),
-    ('GE_Pledge_Tool', 'http://192.168.57.1:8080/'),
-    ('GE_Pledge_Tool', 'http://ec2-52-91-41-6.compute-1.amazonaws.com/');
+        ('GE_Pledge_Tool', 'http://192.168.57.1:8080/'),
+        ('GE_Pledge_Tool', 'http://ec2-52-91-41-6.compute-1.amazonaws.com/');
 	
 INSERT INTO client_grant_type_TEMP (owner_id, grant_type) VALUES
 	('GE_Pledge_Tool', 'authorization_code'),
