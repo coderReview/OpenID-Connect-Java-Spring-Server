@@ -376,8 +376,8 @@
     *margin-left: 11.004728132387708%;
   }
   .row-fluid .offset1:first-child {
-    margin-left: 8.547008547008547%;
-    *margin-left: 8.440625568285142%;
+    float: none;
+    margin: auto;
   }
   input,
   textarea,
