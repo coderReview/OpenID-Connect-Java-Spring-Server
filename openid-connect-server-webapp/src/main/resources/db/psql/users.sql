@@ -11,8 +11,8 @@ START TRANSACTION;
 -- 
 
 INSERT INTO users_TEMP (username, password, enabled) VALUES
-  ('admin','password',true),
-  ('user','password',true);
+  ('admin','$2a$11$YOevTSF9s2ftftVut7Q3Y.uFJddjTxwXzjzyaWVMx9xMHc..Zwxe6',true),
+  ('user','$2a$11$TDyhvIjarjsAIjNRyOD9s.22XMnfOGABcddpYNSpF40QpN/m7EbC.',true);
 
 
 INSERT INTO authorities_TEMP (username, authority) VALUES
@@ -33,17 +33,24 @@ INSERT INTO user_info_TEMP (sub, preferred_username, name, email, email_verified
 INSERT INTO users
   SELECT username, password, enabled FROM users_TEMP
   ON CONFLICT(username)
-  DO NOTHING;
+  DO UPDATE SET 
+  	password = EXCLUDED.password,
+  	enabled = EXCLUDED.enabled;
 
 INSERT INTO authorities
   SELECT username, authority FROM authorities_TEMP
   ON CONFLICT(username, authority)
-  DO NOTHING;
+  DO UPDATE SET 
+  	authority = EXCLUDED.authority;
 
 INSERT INTO user_info (sub, preferred_username, name, email, email_verified)
   SELECT sub, preferred_username, name, email, email_verified FROM user_info_TEMP
-  ON CONFLICT
-  DO NOTHING;
+  ON CONFLICT(sub)
+  DO UPDATE SET 
+  	preferred_username = EXCLUDED.preferred_username,
+  	name = EXCLUDED.name,
+  	email = EXCLUDED.email,
+  	email_verified = EXCLUDED.email_verified;
     
 -- 
 -- Close the transaction and turn autocommit back on

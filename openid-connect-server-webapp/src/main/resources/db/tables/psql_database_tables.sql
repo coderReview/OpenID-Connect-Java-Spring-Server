@@ -110,7 +110,8 @@ CREATE TABLE IF NOT EXISTS authorization_code (
 
 CREATE TABLE IF NOT EXISTS client_grant_type (
 	owner_id BIGINT,
-	grant_type VARCHAR(2000)
+	grant_type VARCHAR(2000),
+	UNIQUE(owner_id, grant_type)
 );
 
 CREATE TABLE IF NOT EXISTS client_response_type (
@@ -169,6 +170,10 @@ CREATE TABLE IF NOT EXISTS client_details (
 	initiate_login_uri VARCHAR(2048),
 	clear_access_tokens_on_refresh BOOLEAN DEFAULT true NOT NULL,
 	
+	software_statement VARCHAR(4096),
+	
+	code_challenge_method VARCHAR(256),
+	
 	UNIQUE (client_id)
 );
 
@@ -194,7 +199,8 @@ CREATE TABLE IF NOT EXISTS client_contact (
 
 CREATE TABLE IF NOT EXISTS client_redirect_uri (
 	owner_id BIGINT, 
-	redirect_uri VARCHAR(2048) 
+	redirect_uri VARCHAR(2048),
+	UNIQUE(owner_id, redirect_uri)
 );
 
 CREATE TABLE IF NOT EXISTS client_claims_redirect_uri (
@@ -217,7 +223,8 @@ CREATE TABLE IF NOT EXISTS client_resource (
 
 CREATE TABLE IF NOT EXISTS client_scope (
 	owner_id BIGINT,
-	scope VARCHAR(2048)
+	scope VARCHAR(2048),
+	UNIQUE(owner_id, scope)
 );
 
 CREATE TABLE IF NOT EXISTS token_scope (
@@ -259,7 +266,8 @@ CREATE TABLE IF NOT EXISTS user_info (
 	address_id VARCHAR(256),
 	updated_time VARCHAR(256),
 	birthdate VARCHAR(256),
-	src VARCHAR(4096)
+	src VARCHAR(4096),
+	UNIQUE(sub)
 );
 
 CREATE TABLE IF NOT EXISTS whitelisted_site (
@@ -357,9 +365,8 @@ CREATE TABLE IF NOT EXISTS saved_registered_client (
 	registered_client VARCHAR(8192)
 );
 
-
-CREATE INDEX at_tv_idx ON access_token(token_value);
-CREATE INDEX ts_oi_idx ON token_scope(owner_id);
-CREATE INDEX at_exp_idx ON access_token(expiration);
-CREATE INDEX rf_ahi_idx ON refresh_token(auth_holder_id);
-CREATE INDEX cd_ci_idx ON client_details(client_id);
+CREATE INDEX IF NOT EXISTS at_tv_idx ON access_token(token_value);
+CREATE INDEX IF NOT EXISTS ts_oi_idx ON token_scope(owner_id);
+CREATE INDEX IF NOT EXISTS at_exp_idx ON access_token(expiration);
+CREATE INDEX IF NOT EXISTS rf_ahi_idx ON refresh_token(auth_holder_id);
+CREATE INDEX IF NOT EXISTS cd_ci_idx ON client_details(client_id);

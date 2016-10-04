@@ -21,21 +21,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
        						http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd">
 
+      <!--
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
 		<property name="jdbcUrl" value="jdbc:hsqldb:mem:oic;sql.syntax_mys=true" />
-<!-- 		<property name="jdbcUrl" value="jdbc:hsqldb:file:/tmp/oic;sql.syntax_mys=true" /> -->
+ 		<property name="jdbcUrl" value="jdbc:hsqldb:file:/tmp/oic;sql.syntax_mys=true" /> 
 		<property name="username" value="oic" />
 		<property name="password" value="oic" />
-	</bean>
+	</bean> -->
 
 	<!-- Use the following to set up the OIC tables in the in-memory DB
 		   If you are using a file based HSQLDB you should not run this every time. -->
-	<jdbc:initialize-database data-source="dataSource">
+	<!-- <jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="classpath:/db/tables/hsql_database_tables.sql"/>
-		<!-- The following file is for the jdbc-user-service spring security implementation -->
+		< The following file is for the jdbc-user-service spring security implementation >
 		<jdbc:script location="classpath:/db/tables/security-schema.sql"/>
-		<!-- The following files are for safely bootstrapping users and clients into the database -->
+		< The following files are for safely bootstrapping users and clients into the database >
 		<jdbc:script location="classpath:/db/tables/loading_temp_tables.sql"/>
 		<jdbc:script location="classpath:/db/users.sql"/>
 		<jdbc:script location="classpath:/db/clients.sql"/>
@@ -45,7 +46,7 @@
 	<bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
  		<property name="databasePlatform" value="org.eclipse.persistence.platform.database.HSQLPlatform" />
 		<property name="showSql" value="true" />
-	</bean>
+	</bean> -->
 
 	<!--  The following is for connecting to a MySQL database that has been initialized with 
 			src/main/resources/db/tables/mysql_database_tables.sql -->
@@ -72,12 +73,11 @@
 
 	<!--  The following is for connecting to a PostgreSQL database that has been initialized with
 			src/main/resources/db/tables/psql_database_tables.sql -->
-	<!--
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost/oic" />
-		<property name="username" value="oic" />
-		<property name="password" value="oic" />
+		<property name="jdbcUrl" value="jdbc:postgresql://192.168.57.101:5432/authentication?sslmode=require" />
+		<property name="username" value="tc" />
+		<property name="password" value="tc" />
 	</bean>
 
 	<jdbc:initialize-database data-source="dataSource">
@@ -93,5 +93,4 @@
 		<property name="databasePlatform" value="org.eclipse.persistence.platform.database.PostgreSQLPlatform" />
 		<property name="showSql" value="true" />
 	</bean>
-	-->
 </beans>
