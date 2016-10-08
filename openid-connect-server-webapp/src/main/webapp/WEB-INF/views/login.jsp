@@ -48,6 +48,9 @@ $(document).ready(function() {
 						<strong>Note:</strong>
 						Please note that if you're using IE 11 with Compatibility Mode turned on, the site may not function correctly. Please turn off Compatibility Mode before accessing the site. You can also use Chrome, Firefox or Safari to access the site.
 					</p>
+					<p>
+						Your password is sent via email and is not your SSO password.
+					</p>
 				</div>
 			</form>
 		</div>
