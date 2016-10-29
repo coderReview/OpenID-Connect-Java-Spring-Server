@@ -40,8 +40,8 @@ public class EndSessionValidator {
 				accessToken.getAuthenticationHolder().getUserAuth() == null ||
 				accessToken.getAuthenticationHolder().getUserAuth().getName() == null ||
 				auth == null ||
-				auth.getPrincipal() == null ||
-				!accessToken.getAuthenticationHolder().getUserAuth().getName().equals(auth.getPrincipal())) {
+				auth.getName() == null ||
+				!accessToken.getAuthenticationHolder().getUserAuth().getName().equals(auth.getName())) {
 			logger.info("Can't verify correct user for logout");
 			return false;
 		} else {
