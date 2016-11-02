@@ -43,6 +43,14 @@ $(document).ready(function() {
 				<div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="submit" class="btn" value="<spring:message code="login.login-button"/>" name="submit">
+					<p>
+						<br>
+						<strong>Note:</strong>
+						Please note that if you're using IE 11 with Compatibility Mode turned on, the site may not function correctly. Please turn off Compatibility Mode before accessing the site. You can also use Chrome, Firefox or Safari to access the site.
+					</p>
+					<p>
+						Your password is sent via email and is not your SSO password.
+					</p>
 				</div>
 			</form>
 		</div>
